@@ -29,7 +29,6 @@ export default function HomePage() {
         <section className='bg-white'>
           <div className='layout flex min-h-screen flex-col items-center justify-center text-center'>
             <Image src={Logo} alt='Logo' />
-            <h1 className='mt-4'>Deito</h1>
             <p className='mt-2 text-sm text-gray-800'>
               Frontend & Backend Repository for Deito{' '}
             </p>
