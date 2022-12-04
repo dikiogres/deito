@@ -2,7 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 
+import UnstyledLink from '@/components/links/UnstyledLink';
+
 import Logo from '~/Logo.png';
+
+const links = [{ href: '/beibs', label: 'Beibs' }];
 
 export default function Header() {
   return (
@@ -27,6 +31,23 @@ export default function Header() {
               Register
             </button>
           </div>
+          <nav>
+            <ul className='flex items-center justify-between space-x-4'>
+              {links.map(({ href, label }) => (
+                <li key={`${href}${label}`}>
+                  <UnstyledLink href={href} className=''>
+                    {label}
+                  </UnstyledLink>
+                </li>
+              ))}
+
+              <li>
+                <UnstyledLink href='/login' className=''>
+                  Login
+                </UnstyledLink>
+              </li>
+            </ul>
+          </nav>
         </div>
       </nav>
     </header>
