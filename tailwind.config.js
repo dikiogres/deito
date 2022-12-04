@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         primary: ['Inter', ...fontFamily.sans],
+        poppins: ['Poppins', ...fontFamily.sans],
       },
       colors: {
         primary: {
