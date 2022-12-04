@@ -5,10 +5,7 @@ import UnstyledLink from '@/components/links/UnstyledLink';
 
 import Logo from '~/Logo.png';
 
-const links = [
-  { href: '/', label: 'Login' },
-  { href: '/', label: '' },
-];
+const links = [{ href: '/beibs', label: 'Beibs' }];
 
 export default function Header() {
   return (
@@ -24,14 +21,17 @@ export default function Header() {
             <ul className='flex items-center justify-between space-x-4'>
               {links.map(({ href, label }) => (
                 <li key={`${href}${label}`}>
-                  <UnstyledLink
-                    href={href}
-                    className='hover:text-gray-60 rounded-xl bg-slate-600 px-4 py-1'
-                  >
+                  <UnstyledLink href={href} className=''>
                     {label}
                   </UnstyledLink>
                 </li>
               ))}
+
+              <li>
+                <UnstyledLink href='/login' className=''>
+                  Login
+                </UnstyledLink>
+              </li>
             </ul>
           </nav>
         </div>
