@@ -7,8 +7,8 @@ import Profile3 from '~/images/profile3.jpg';
 
 const Showcase = () => {
   return (
-    <section className='grid grid-cols-1 justify-items-center p-10 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3'>
-      <div className='hover:shadow-3xl max-w-sm overflow-hidden rounded shadow-lg transition duration-500 hover:scale-110'>
+    <section className='grid grid-cols-1 justify-items-center bg-slate-900 p-10 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3'>
+      <div className='hover:shadow-3xl max-w-sm overflow-hidden rounded bg-white shadow-lg transition duration-500 hover:scale-110'>
         <Image className='w-full' src={Profile1} alt='Profile' />
         <div className='px-6 py-4'>
           <div className='mb-2 text-xl font-bold'>Bonnie Green</div>
@@ -88,7 +88,7 @@ const Showcase = () => {
         </div>
       </div>
 
-      <div className='hover:shadow-3xl max-w-sm overflow-hidden rounded shadow-lg transition duration-500 hover:scale-110'>
+      <div className='hover:shadow-3xl max-w-sm overflow-hidden rounded bg-white shadow-lg transition duration-500 hover:scale-110'>
         <Image className='w-full' src={Profile2} alt='Profile' />
         <div className='px-6 py-4'>
           <div className='mb-2 text-xl font-bold'>Bonnie Green</div>
@@ -168,7 +168,7 @@ const Showcase = () => {
         </div>
       </div>
 
-      <div className='hover:shadow-3xl max-w-sm overflow-hidden rounded shadow-lg transition duration-500 hover:scale-110'>
+      <div className='hover:shadow-3xl max-w-sm overflow-hidden rounded bg-white shadow-lg transition duration-500 hover:scale-110'>
         <Image className='w-full' src={Profile3} alt='Profile' />
         <div className='px-6 py-4'>
           <div className='mb-2 text-xl font-bold'>Bonnie Green</div>
