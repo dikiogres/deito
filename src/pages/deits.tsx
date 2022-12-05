@@ -14,7 +14,7 @@ export default function HomePage() {
         <section className='bg-white font-poppins'>
           <div className='layout flex min-h-screen flex-col bg-slate-900'>
             <section className='mx-auto grid w-full max-w-6xl grid-cols-3 bg-slate-900 pt-8 pb-16 text-left text-white'>
-              <div className='mx-8 mt-16 flex flex-col rounded-xl bg-slate-700 px-8'>
+              <div className='mx-8 mt-16 flex cursor-pointer flex-col rounded-xl bg-slate-700 px-8 transition hover:-translate-y-2 hover:scale-105 hover:shadow-lg'>
                 <Image
                   className='-mt-8'
                   src='/images/power.png'
@@ -49,7 +49,7 @@ export default function HomePage() {
                   Rp. 300,000
                 </p>
               </div>
-              <div className='mx-8 mt-16 flex flex-col rounded-xl bg-slate-700 px-8'>
+              <div className='mx-8 mt-16 flex cursor-pointer flex-col rounded-xl bg-slate-700 px-8 transition hover:-translate-y-2 hover:scale-105 hover:shadow-lg'>
                 <Image
                   className='-mt-8'
                   src='/images/power.png'
@@ -84,7 +84,7 @@ export default function HomePage() {
                   Rp. 300,000
                 </p>
               </div>
-              <div className='mx-8 mt-16 flex flex-col rounded-xl bg-slate-700 px-8'>
+              <div className='mx-8 mt-16 flex cursor-pointer flex-col rounded-xl bg-slate-700 px-8 transition hover:-translate-y-2 hover:scale-105 hover:shadow-lg'>
                 <Image
                   className='-mt-8'
                   src='/images/power.png'
@@ -119,7 +119,7 @@ export default function HomePage() {
                   Rp. 300,000
                 </p>
               </div>
-              <div className='mx-8 mt-16 flex flex-col rounded-xl bg-slate-700 px-8'>
+              <div className='mx-8 mt-16 flex cursor-pointer flex-col rounded-xl bg-slate-700 px-8 transition hover:-translate-y-2 hover:scale-105 hover:shadow-lg'>
                 <Image
                   className='-mt-8'
                   src='/images/power.png'
