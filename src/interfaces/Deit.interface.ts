@@ -10,6 +10,8 @@ interface Deit {
   rates: number;
   rating: number;
   tags: string[];
+  album: string[];
+  profilePicture: string[];
 }
 
 export default Deit;
