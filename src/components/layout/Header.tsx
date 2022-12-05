@@ -4,6 +4,8 @@ import * as React from 'react';
 
 import Logo from '~/Logo.png';
 
+const links = [{ href: '/deits', label: 'Deits' }];
+
 export default function Header() {
   return (
     // <header className='sticky top-0 z-50 w-full bg-slate-800 text-white'>
@@ -27,6 +29,23 @@ export default function Header() {
               <Link href='/auth/register'>Register</Link>
             </button>
           </div>
+          <nav>
+            <ul className='flex items-center justify-between space-x-4'>
+              {links.map(({ href, label }) => (
+                <li key={`${href}${label}`}>
+                  <UnstyledLink href={href} className=''>
+                    {label}
+                  </UnstyledLink>
+                </li>
+              ))}
+
+              <li>
+                <UnstyledLink href='/login' className=''>
+                  Login
+                </UnstyledLink>
+              </li>
+            </ul>
+          </nav>
         </div>
       </nav>
     </header>
