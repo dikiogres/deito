@@ -1,38 +1,8 @@
 import React from 'react';
 
+import { profileDataItems } from '@/data/profileItems.data';
+
 import ShowcaseCard from '@/components/cards/showcaseCard';
-
-import { Profile } from '@/types/profile.type';
-
-const data: Profile[] = [
-  {
-    id: 1,
-    img: '/images/profile1.jpg',
-    name: 'Makima',
-    description: 'Menyayangimu setiap saat',
-    rating: 4,
-    reviews: 69,
-    interest: '#kentu',
-  },
-  {
-    id: 2,
-    img: '/images/profile2.jpg',
-    name: 'Rukia',
-    description: 'Menyayangimu setiap saat',
-    rating: 4,
-    reviews: 69,
-    interest: '#kentu',
-  },
-  {
-    id: 3,
-    img: '/images/profile3.jpg',
-    name: 'Yumeko Jabami',
-    description: 'Menyayangimu setiap saat',
-    rating: 4,
-    reviews: 69,
-    interest: '#kentu',
-  },
-];
 
 const Showcase = () => {
   return (
@@ -41,7 +11,7 @@ const Showcase = () => {
         Top Deits
       </p>
       <div className='grid grid-cols-1 justify-items-center p-10 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3'>
-        {data?.map((item) => (
+        {profileDataItems?.map((item) => (
           <ShowcaseCard key={item.id} item={item} />
         ))}
       </div>
