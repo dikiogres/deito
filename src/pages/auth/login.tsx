@@ -1,7 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import BgImg from '~/images/auth/registerBackground.png';
+import Logo from '~/Logo.png';
 
 const Login = () => {
   return (
@@ -14,7 +16,7 @@ const Login = () => {
       <div className='container mx-auto'>
         <div className='mx-auto flex w-10/12 flex-col overflow-hidden rounded-xl bg-white shadow-lg lg:w-8/12 lg:flex-row'>
           <div className='w-full py-16 px-12 lg:w-1/2'>
-            <h2 className='mb-4 text-3xl'>Login</h2>
+            <Image src={Logo} alt='Logo' width={128} />
             <p className='mb-4'>Please log in to your account</p>
             <form action='#'>
               <div className='mt-5'>
