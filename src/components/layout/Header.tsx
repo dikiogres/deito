@@ -18,13 +18,13 @@ export default function Header() {
               type='button'
               className='text-md mr-3 rounded-3xl bg-gray-600 px-10 py-2.5 text-center font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300 md:mr-0'
             >
-              Log in
+              <Link href='/auth/login'>Log in</Link>
             </button>
             <button
               type='button'
               className='text-md mr-3 rounded-3xl bg-pink-400 px-10 py-2.5 text-center font-medium text-white hover:bg-pink-600 focus:outline-none focus:ring-4 focus:ring-blue-300 md:mr-0'
             >
-              Register
+              <Link href='/auth/register'>Register</Link>
             </button>
           </div>
         </div>
