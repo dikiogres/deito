@@ -23,9 +23,9 @@ const Hero = () => {
               Start Now
             </a>
           </div>
-          {/* <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
+          {/* <div className="hidden lg:mt-0 lg:col-span-5 ">
                 <Image src={Logo.src} alt="mockup" height='20' width='500'/>
-              </div>                  */}
+            </div>                  */}
         </div>
       </div>
     </section>
