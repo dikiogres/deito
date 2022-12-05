@@ -6,7 +6,7 @@ import UnstyledLink from '@/components/links/UnstyledLink';
 
 import Logo from '~/Logo.png';
 
-const links = [{ href: '/beibs', label: 'Beibs' }];
+const links = [{ href: '/deits', label: 'Deits' }];
 
 export default function Header() {
   return (
