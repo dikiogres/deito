@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { profileDataItems } from '@/data/profileItems.data';
+import { profileDataItems } from '@/data/profileDataItems.data';
 
 import ShowcaseCard from '@/components/cards/showcaseCard';
 
