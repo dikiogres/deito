@@ -6,7 +6,13 @@ import { Profile } from '@/types/profile.type';
 const showcaseCard = ({ item }: { item: Profile }) => {
   return (
     <div className='hover:shadow-3xl max-w-sm overflow-hidden rounded bg-white shadow-lg transition duration-500 hover:scale-110'>
-      <Image className='w-full' src={item.img} alt='Profile' />
+      <Image
+        className='w-full'
+        src={item.img}
+        alt='Profile'
+        width={512}
+        height={256}
+      />
       <div className='px-6 py-4'>
         <div className='mb-2 text-xl font-bold'>{item.name}</div>
         <p className='text-base text-gray-700'>{item.description}</p>
