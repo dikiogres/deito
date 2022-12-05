@@ -1,7 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import BgImg from '~/images/auth/registerBackground.png';
+import Logo from '~/Logo.png';
 
 const Register = () => {
   return (
@@ -31,7 +33,7 @@ const Register = () => {
             </div>
           </div>
           <div className='w-full py-16 px-12 lg:w-1/2'>
-            <h2 className='mb-4 text-3xl'>Register</h2>
+            <Image src={Logo} alt='Logo' width={128} />
             <p className='mb-4'>
               Create your account. It’s free and only take a minute
             </p>
