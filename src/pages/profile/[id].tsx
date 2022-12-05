@@ -1,8 +1,15 @@
+import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import * as React from 'react';
+
+import db from '@/lib/firebase';
 
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
+
+import Deit from '@/interfaces/Deit.interface';
+import Service from '@/interfaces/Service.interface';
 
 enum ProfilePages {
   Profile,
@@ -11,14 +18,35 @@ enum ProfilePages {
 }
 
 export default function HomePage() {
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [deit, setDeit] = React.useState<Deit>();
+  const [services, setServices] = React.useState<Service[]>();
+
+  const getProfileData = async () => {
+    const deitData = await getDoc(doc(db, `dater/${id}`));
+    onSnapshot(collection(db, `dater/${id}/services`), (services) => {
+      const servicesData = services.docs.map((service) => {
+        return {
+          id: service.id,
+          ...service.data(),
+        };
+      });
+
+      setServices(servicesData as Service[]);
+    });
+
+    setDeit({ id: deitData.id, ...deitData.data() } as Deit);
+  };
+
+  React.useEffect(() => {
+    getProfileData();
+  });
+
   const [activePage, setActivePage] = React.useState<ProfilePages>(
     ProfilePages.Profile
   );
-
-  const addOns = [
-    { name: 'Handholding', price: 50000 },
-    { name: 'Hug', price: 50000 },
-  ];
 
   return (
     <Layout>
@@ -37,23 +65,25 @@ export default function HomePage() {
                 height={200}
               />
               <div>
-                <p className='text-4xl font-semibold'>Neten</p>
+                <p className='text-4xl font-semibold'>{deit?.name}</p>
                 <div className='my-2 flex'>
                   <div className='mr-3 rounded-xl bg-[#221D2F] px-3 py-1'>
-                    20
+                    {deit?.age}
                   </div>
                   <div className='mr-3 rounded-xl bg-[#221D2F] px-3 py-1'>
-                    Surabaya
+                    {deit?.location}
                   </div>
                 </div>
                 <p className='my-2 text-slate-200'>Tags</p>
                 <div className='my-2 flex'>
-                  <div className='mr-3 rounded-xl bg-[#221D2F] px-3 py-1'>
-                    Yandere
-                  </div>
-                  <div className='mr-3 rounded-xl bg-[#221D2F] px-3 py-1'>
-                    Funi
-                  </div>
+                  {deit?.tags.map((tag) => (
+                    <div
+                      key={tag}
+                      className='mr-3 rounded-xl bg-[#221D2F] px-3 py-1'
+                    >
+                      {tag}
+                    </div>
+                  ))}
                 </div>
               </div>
             </section>
@@ -92,10 +122,10 @@ export default function HomePage() {
               <div className='mr-8 flex w-80 flex-col'>
                 <div className='mb-10 w-full rounded-xl bg-[#221D2F]'>
                   <p className='my-6 text-center text-xl'>Add-On Services</p>
-                  {addOns.map((addOn, i) => (
+                  {services?.map((service, i) => (
                     <div key={i} className='mx-8 mb-4'>
-                      <p>{addOn.name}</p>
-                      <p className='text-sm text-slate-300'>{addOn.price}</p>
+                      <p>{service.name}</p>
+                      <p className='text-sm text-slate-300'>{service.price}</p>
                     </div>
                   ))}
                 </div>
@@ -106,24 +136,19 @@ export default function HomePage() {
               <div className='flex w-full flex-col'>
                 <div className='mb-10 h-fit w-full rounded-xl bg-[#221D2F] px-8 py-10'>
                   <h2 className='mb-3'>Bio</h2>
-                  <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quos ea quasi modi id ipsum ut soluta nulla, sunt libero
-                    sapiente eligendi nobis itaque corporis similique officiis
-                    unde doloribus et eum nostrum beatae! Pariatur, quibusdam.
-                  </p>
+                  <p>{deit?.bio}</p>
                 </div>
                 <div className='mb-10 h-fit w-full rounded-xl bg-[#221D2F] px-8 py-10'>
                   <h2 className='mb-3'>Album</h2>
                   <div className='flex overflow-x-clip'>
-                    {Array.from(Array(10).keys()).map((i) => (
+                    {deit?.album.map((image, i) => (
                       <Image
                         key={i}
                         className='mr-4'
-                        src='/images/power.png'
+                        src={`/images/${image}`}
                         alt='profile picture'
-                        width={200}
-                        height={200}
+                        width={150}
+                        height={150}
                       />
                     ))}
                   </div>
@@ -137,8 +162,10 @@ export default function HomePage() {
                       width={25}
                       height={20}
                     />
-                    <p className='mx-2 text-2xl'>5.0</p>
-                    <p className='text-sm text-slate-200'>10 Reviews</p>
+                    <p className='mx-2 text-2xl'>{deit?.rating}</p>
+                    <p className='text-sm text-slate-200'>
+                      {deit?.rates || 0} Reviews
+                    </p>
                   </div>
                 </div>
               </div>
