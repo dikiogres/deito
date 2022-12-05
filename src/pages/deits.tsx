@@ -1,17 +1,30 @@
+import { collection, onSnapshot } from 'firebase/firestore';
 import Image from 'next/image';
-import * as React from 'react';
+import { useEffect, useState } from 'react';
+
+import db from '@/lib/firebase';
 
 import Layout from '@/components/layout/Layout';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import Seo from '@/components/Seo';
 
+import Deit from '@/interfaces/Deit.interface';
+
 export default function HomePage() {
-  const deits = [
-    'asdh1349nc293r13',
-    '123enas97314m12',
-    '123enas97314m12',
-    '123enas97314m12',
-  ];
+  const [deits, setDeits] = useState<Deit[]>();
+
+  useEffect(() => {
+    onSnapshot(collection(db, 'dater'), (deits) => {
+      const deitsData = deits.docs.map((deit) => {
+        return {
+          id: deit.id,
+          ...deit.data(),
+        };
+      });
+
+      setDeits(deitsData as Deit[]);
+    });
+  }, []);
 
   return (
     <Layout>
@@ -22,45 +35,46 @@ export default function HomePage() {
         <section className='bg-white font-poppins'>
           <div className='layout flex min-h-screen flex-col bg-slate-900'>
             <section className='mx-auto grid w-full max-w-6xl grid-cols-3 bg-slate-900 pt-8 pb-16 text-left text-white'>
-              {deits.map((deit) => (
-                <UnstyledLink key={deit} href={`/profile/${deit}`}>
-                  <div className='mx-8 mt-16 flex cursor-pointer flex-col rounded-xl bg-slate-700 px-8 transition hover:-translate-y-2 hover:scale-105 hover:shadow-lg'>
-                    <Image
-                      className='-mt-8'
-                      src='/images/power.png'
-                      alt='profPic'
-                      width={120}
-                      height={120}
-                    />
-                    <p className='mt-2 text-2xl font-medium'>Neten</p>
-                    <div className='flex items-center'>
+              {deits &&
+                deits.map((deit) => (
+                  <UnstyledLink key={deit} href={`/profile/${deit.id}`}>
+                    <div className='mx-8 mt-16 flex cursor-pointer flex-col rounded-xl bg-slate-700 px-8 transition hover:-translate-y-2 hover:scale-105 hover:shadow-lg'>
                       <Image
-                        src='/images/star.png'
-                        alt='star'
-                        width={25}
-                        height={20}
+                        className='-mt-8'
+                        src='/images/power.png'
+                        alt='profPic'
+                        width={120}
+                        height={120}
                       />
-                      <p className='mx-2 text-2xl'>5.0</p>
-                      <p className='text-sm text-slate-200'>(290)</p>
-                    </div>
-                    <div className='mt-2 flex'>
-                      <div className='mr-2 rounded-md bg-slate-600 py-1 px-2'>
-                        Weeb
+                      <p className='mt-2 text-2xl font-medium'>{deit.name}</p>
+                      <div className='flex items-center'>
+                        <Image
+                          src='/images/star.png'
+                          alt='star'
+                          width={25}
+                          height={20}
+                        />
+                        <p className='mx-2 text-2xl'>{deit.rating}</p>
+                        <p className='text-sm text-slate-200'>({deit.rates})</p>
                       </div>
-                      <div className='rounded-md bg-slate-600 py-1 px-2'>
-                        Pick Up
+                      <div className='mt-2 flex'>
+                        {deit.tags.map((tag) => (
+                          <div
+                            key={tag}
+                            className='mr-2 rounded-md bg-slate-600 py-1 px-2'
+                          >
+                            {tag}
+                          </div>
+                        ))}
                       </div>
-                    </div>
-                    <p className='mt-3 text-slate-200'>
-                      Can't wait to be your friend
-                    </p>
+                      <p className='mt-3 text-slate-200'>{deit.desc}</p>
 
-                    <p className='mt-8 mb-8 justify-self-end text-xl font-semibold'>
-                      Rp. 300,000
-                    </p>
-                  </div>
-                </UnstyledLink>
-              ))}
+                      <p className='mt-8 mb-8 justify-self-end text-xl font-semibold'>
+                        {deit.price}
+                      </p>
+                    </div>
+                  </UnstyledLink>
+                ))}
             </section>
           </div>
         </section>
