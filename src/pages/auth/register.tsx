@@ -1,19 +1,31 @@
+import AOS from 'aos';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import 'aos/dist/aos.css';
 
 import BgImg from '~/images/auth/registerBackground.png';
 import Logo from '~/Logo.png';
 
 const Register = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <div
       className='min-h-screen py-40'
       style={{
-        backgroundImage: 'linear-gradient(115deg, #E97991, #20202B)',
+        backgroundImage: 'linear-gradient(115deg, #20202B, #E97991)',
       }}
     >
-      <div className='container mx-auto'>
+      <div
+        className='container mx-auto'
+        data-aos='flip-right'
+        data-aos-easing='ease-out-cubic'
+        data-aos-duration='2500'
+      >
         <div className='mx-auto flex w-10/12 flex-col overflow-hidden rounded-xl bg-white shadow-lg lg:w-8/12 lg:flex-row'>
           <div
             className='flex w-full flex-col items-center justify-center bg-cover bg-center bg-no-repeat p-12 lg:w-1/2'
