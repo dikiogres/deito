@@ -33,7 +33,9 @@ const Register = () => {
             </div>
           </div>
           <div className='w-full py-16 px-12 lg:w-1/2'>
-            <Image src={Logo} alt='Logo' width={128} />
+            <Link href='/'>
+              <Image src={Logo} alt='Logo' width={128} />
+            </Link>
             <p className='mb-4'>
               Create your account. It’s free and only take a minute
             </p>

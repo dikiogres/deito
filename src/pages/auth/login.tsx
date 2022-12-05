@@ -16,7 +16,9 @@ const Login = () => {
       <div className='container mx-auto'>
         <div className='mx-auto flex w-10/12 flex-col overflow-hidden rounded-xl bg-white shadow-lg lg:w-8/12 lg:flex-row'>
           <div className='w-full py-16 px-12 lg:w-1/2'>
-            <Image src={Logo} alt='Logo' width={128} />
+            <Link href='/'>
+              <Image src={Logo} alt='Logo' width={128} />
+            </Link>
             <p className='mb-4'>Please log in to your account</p>
             <form action='#'>
               <div className='mt-5'>

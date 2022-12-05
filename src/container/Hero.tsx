@@ -2,7 +2,7 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <section className="bg-[url('/images/hero.png')] dark:bg-gray-900">
+    <section className="bg-[url('/images/home/hero.png')] dark:bg-gray-900">
       <div
         style={{
           backgroundColor: 'rgba(0, 0, 0, 0.6)',
