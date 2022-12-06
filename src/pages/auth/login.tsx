@@ -1,10 +1,13 @@
 import AOS from 'aos';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import 'aos/dist/aos.css';
+
+import { useAuth } from '../../auth/context/AuthContext';
 
 import BgImg from '~/images/auth/registerBackground.png';
 import Logo from '~/Logo.png';
