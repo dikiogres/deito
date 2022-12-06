@@ -6,6 +6,7 @@ interface Deit {
   age: number;
   bio: string;
   location: string;
+  gender: string;
   price: number;
   rates: number;
   rating: number;

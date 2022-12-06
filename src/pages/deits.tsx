@@ -46,7 +46,23 @@ export default function HomePage() {
                         width={120}
                         height={120}
                       />
-                      <p className='mt-2 text-2xl font-medium'>{deit?.name}</p>
+                      <div className='flex items-end'>
+                        <p className='mt-2 mr-4 text-2xl font-medium'>
+                          {deit?.name}
+                        </p>
+                        {deit?.gender && (
+                          <div
+                            className={`mr-3 w-9 rounded-xl bg-[#221D2F] px-3 py-1 text-center font-black
+                          ${
+                            deit.gender == 'male'
+                              ? 'text-blue-500'
+                              : 'text-pink-500'
+                          }`}
+                          >
+                            {deit.gender == 'male' ? '♂️' : '♀️'}
+                          </div>
+                        )}
+                      </div>
                       <div className='flex items-center'>
                         <Image
                           src='/images/star.png'
