@@ -1,8 +1,10 @@
 import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
+import convertToIDR from '@/lib/converter';
 import db from '@/lib/firebase';
 
 import Layout from '@/components/layout/Layout';
@@ -66,7 +68,22 @@ export default function HomePage() {
               />
               <div>
                 <p className='text-4xl font-semibold'>{deit?.name}</p>
+                <p className='text-2xl font-medium'>
+                  {deit?.price && convertToIDR(deit.price)}
+                </p>
                 <div className='my-2 flex'>
+                  {deit?.gender && (
+                    <div
+                      className={`mr-3 rounded-xl bg-[#221D2F] px-3 py-1
+                          ${
+                            deit.gender == 'male'
+                              ? 'text-blue-500'
+                              : 'text-pink-500'
+                          }`}
+                    >
+                      {deit.gender == 'male' ? '♂️' : '♀️'}
+                    </div>
+                  )}
                   <div className='mr-3 rounded-xl bg-[#221D2F] px-3 py-1'>
                     {deit?.age}
                   </div>
@@ -98,24 +115,26 @@ export default function HomePage() {
               >
                 Profile
               </p>
-              <p
-                onClick={() => setActivePage(ProfilePages.Album)}
+              <a
+                // onClick={() => setActivePage(ProfilePages.Album)}
+                href='#album'
                 className={`mr-8 cursor-pointer ${
                   activePage == ProfilePages.Album &&
                   'border-b-4 border-b-pink-500 pb-2'
                 } text-2xl font-semibold`}
               >
                 Album
-              </p>
-              <p
-                onClick={() => setActivePage(ProfilePages.Reviews)}
+              </a>
+              <a
+                href='#reviews'
+                // onClick={() => setActivePage(ProfilePages.Reviews)}
                 className={`mr-8 cursor-pointer ${
                   activePage == ProfilePages.Reviews &&
                   'border-b-4 border-b-pink-500 pb-2'
                 } text-2xl font-semibold`}
               >
                 Reviews
-              </p>
+              </a>
             </section>
 
             <section className='my-8 flex'>
@@ -125,20 +144,28 @@ export default function HomePage() {
                   {services?.map((service, i) => (
                     <div key={i} className='mx-8 mb-4'>
                       <p>{service.name}</p>
-                      <p className='text-sm text-slate-300'>{service.price}</p>
+                      <p className='text-sm text-slate-300'>
+                        {service.price && convertToIDR(service.price)}
+                      </p>
                     </div>
                   ))}
                 </div>
-                <div className='w-full rounded-xl bg-green-500 px-6 py-3 text-white'>
-                  Chat on Whatsapp
-                </div>
+                <Link
+                  href={`/order/${id}`}
+                  className='w-full rounded-xl bg-pink-500 px-6 py-3 text-white'
+                >
+                  Order
+                </Link>
               </div>
               <div className='flex w-full flex-col'>
                 <div className='mb-10 h-fit w-full rounded-xl bg-[#221D2F] px-8 py-10'>
                   <h2 className='mb-3'>Bio</h2>
                   <p>{deit?.bio}</p>
                 </div>
-                <div className='mb-10 h-fit w-full rounded-xl bg-[#221D2F] px-8 py-10'>
+                <div
+                  id='album'
+                  className='mb-10 h-fit w-full rounded-xl bg-[#221D2F] px-8 py-10'
+                >
                   <h2 className='mb-3'>Album</h2>
                   <div className='flex overflow-x-clip'>
                     {deit?.album?.map((image, i) => (
@@ -153,7 +180,10 @@ export default function HomePage() {
                     ))}
                   </div>
                 </div>
-                <div className='mb-10 h-fit w-full rounded-xl bg-[#221D2F] px-8 py-10'>
+                <div
+                  id='reviews'
+                  className='mb-10 h-fit w-full rounded-xl bg-[#221D2F] px-8 py-10'
+                >
                   <h2 className='mb-3'>Reviews</h2>
                   <div className='flex items-center'>
                     <Image
