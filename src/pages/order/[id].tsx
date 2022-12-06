@@ -99,6 +99,7 @@ export default function HomePage() {
       done: false,
       services: selectedServices,
       user: doc(db, '/users/phaRp8zlFyuaSUm4MLRH'),
+      name: await (await getDoc(doc(db, `dater/${id}`))).get('name'),
       total,
     });
 
