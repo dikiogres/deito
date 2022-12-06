@@ -16,11 +16,11 @@ export default function HomePage() {
   }, []);
 
   return (
-    <Layout>
-      {/* <Seo templateTitle='Home' /> */}
-      <Seo />
-      <main>
-        <section className='relative overflow-hidden bg-slate-900'>
+    <main className='bg-slate-900'>
+      <Layout>
+        {/* <Seo templateTitle='Home' /> */}
+        <Seo />
+        <section className='overflow-hidde relative'>
           <div data-aos='fade-down' data-aos-duration='1000'>
             <Hero />
           </div>
@@ -34,7 +34,7 @@ export default function HomePage() {
             <Showcase />
           </div>
         </section>
-      </main>
-    </Layout>
+      </Layout>
+    </main>
   );
 }
