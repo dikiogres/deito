@@ -4,17 +4,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
+import { serviceDataItems } from '@/data/serviceDataItems.data';
+
 import ServiceCard from '@/components/cards/serviceCard';
-
-import { Service } from '@/types/service.type';
-
-const data: Service[] = [
-  {
-    id: 1,
-    img: '',
-    dater: 3,
-  },
-];
 
 const Service = () => {
   SwiperCore.use([Autoplay]);
@@ -43,7 +35,7 @@ const Service = () => {
         speed={5000}
       >
         <SwiperSlide>
-          {data?.map((item) => (
+          {serviceDataItems?.map((item) => (
             <ServiceCard key={item.id} item={item} />
           ))}
         </SwiperSlide>
