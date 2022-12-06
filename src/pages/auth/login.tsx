@@ -19,6 +19,9 @@ const Login = () => {
     AOS.init();
   }, []);
 
+  const { logIn } = useAuth();
+  const router = useRouter();
+
   const methods = useForm<LoginType>({ mode: 'onBlur' });
 
   const {
@@ -28,7 +31,12 @@ const Login = () => {
   } = methods;
 
   const onSubmit = async (data: LoginType) => {
-    console.log(data);
+    try {
+      await logIn(data.email, data.password);
+      router.push('/dashboard');
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
 
   return (
