@@ -7,7 +7,7 @@ const ServiceCard = ({ item }: { item: Service }) => {
     <div
       className='flex h-64 w-48 rounded-lg p-6 shadow-lg transition duration-500 hover:scale-110 hover:shadow-2xl dark:border-gray-700 dark:bg-gray-800'
       style={{
-        backgroundImage: `${item.img}`,
+        backgroundImage: `url(${item.img})`,
       }}
     >
       <div className='flex items-end'>

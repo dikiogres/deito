@@ -4,7 +4,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
-import { serviceDataItems } from '@/data/serviceDataItems.data';
+import {
+  serviceDataItems,
+  serviceDataItems2,
+} from '@/data/serviceDataItems.data';
 
 import ServiceCard from '@/components/cards/serviceCard';
 
@@ -33,6 +36,7 @@ const Service = () => {
           disableOnInteraction: false,
         }}
         speed={5000}
+        className='my-10'
       >
         {serviceDataItems?.map((item) => (
           <SwiperSlide key={item.id}>
@@ -57,8 +61,9 @@ const Service = () => {
           reverseDirection: true,
         }}
         speed={5000}
+        className='my-10'
       >
-        {serviceDataItems?.map((item) => (
+        {serviceDataItems2?.map((item) => (
           <SwiperSlide key={item.id}>
             <ServiceCard item={item} />
           </SwiperSlide>
