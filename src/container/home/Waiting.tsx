@@ -13,7 +13,7 @@ const Waiting = () => {
   return (
     <section className='w-full bg-slate-900 py-14 text-white'>
       <div className='mx-auto  max-w-6xl'>
-        <p className='py-6 text-center text-xl'>
+        <p className='py-6 text-center text-2xl font-semibold'>
           100,000 Deits are waiting for you
         </p>
         <div className='grid grid-cols-3'>
