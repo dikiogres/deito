@@ -1,17 +1,5 @@
-import cookies from 'js-cookie';
-
-export const getUserFromCookie = () => {
-  const cookie = cookies.get('auth');
-  if (!cookie) {
-    return;
-  }
-  return JSON.parse(cookie);
+const withAuth = () => {
+  return;
 };
 
-export const setUserCookie = ({ user }: { user: string }) => {
-  cookies.set('auth', user, {
-    expires: 1 / 24,
-  });
-};
-
-export const removeUserCookie = () => cookies.remove('auth');
+export default withAuth;
