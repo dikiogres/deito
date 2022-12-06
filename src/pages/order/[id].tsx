@@ -1,4 +1,6 @@
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import Datepicker from 'react-datepicker';
@@ -25,6 +27,7 @@ export default function HomePage() {
   const [addOns, setAddOns] = React.useState(0);
   const [selectedDate, setDate] = React.useState(new Date());
   const [orders, setOrders] = React.useState([{}]);
+  const [confirmed, setConfirmed] = React.useState(false);
 
   React.useEffect(() => {
     if (!router.isReady) return;
@@ -80,6 +83,10 @@ export default function HomePage() {
     setOrders(ordersData);
   };
 
+  const confirm = async () => {
+    setConfirmed(true);
+  };
+
   return (
     <Layout>
       {/* <Seo templateTitle='Home' /> */}
@@ -88,110 +95,134 @@ export default function HomePage() {
       <main>
         <div className='layout flex-co flex min-h-screen bg-[#13131A] font-poppins'>
           <div className='mx-auto mt-12 w-full max-w-6xl text-white'>
-            <section className='flex flex-col pb-16'>
-              <h1 className='my-6'>Order</h1>
-              <hr />
-              <form action=''>
-                <div className='my-6 flex w-full items-center justify-between'>
-                  <label htmlFor='' className='text-2xl font-medium'>
-                    Session
-                  </label>
-                  <div className='flex items-center'>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSessions(sessions == 1 ? 1 : sessions - 1);
-                      }}
-                      className='mx-2 rounded-xl bg-[#221D2F] px-4 py-2 text-xl text-white'
+            {confirmed ? (
+              <section className='flex flex-col pb-16'>
+                <h1>Payment</h1>
+                <hr className='my-6' />
+                <h2>Bayar menggunakan QRIS</h2>
+                <Image
+                  className='mt-4'
+                  src='/images/qr.png'
+                  alt='profile picture'
+                  width={300}
+                  height={300}
+                />
+                <Link
+                  href='/orders'
+                  className='mt-4 w-28 rounded-xl bg-[#E97991] px-6 py-2 text-2xl text-white'
+                >
+                  Done
+                </Link>
+              </section>
+            ) : (
+              <section className='flex flex-col pb-16'>
+                <h1 className='my-6'>Order</h1>
+                <hr />
+                <form action=''>
+                  <div className='my-6 flex w-full items-center justify-between'>
+                    <label htmlFor='' className='text-2xl font-medium'>
+                      Session
+                    </label>
+                    <div className='flex items-center'>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSessions(sessions == 1 ? 1 : sessions - 1);
+                        }}
+                        className='mx-2 rounded-xl bg-[#221D2F] px-4 py-2 text-xl text-white'
+                      >
+                        -
+                      </button>
+                      <input
+                        type='number'
+                        value={sessions}
+                        contentEditable={false}
+                        onKeyDown={(e) => e.preventDefault()}
+                        className='mx-2 w-14 rounded-xl bg-[#221D2F] px-4 py-2 text-xl text-white'
+                      />
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSessions(sessions + 1);
+                        }}
+                        className='mx-2 rounded-xl bg-[#221D2F] px-4 py-2 text-xl text-white'
+                      >
+                        +
+                      </button>
+                      <p className='ml-4 text-2xl font-semibold'>
+                        {deit?.price && convertToIDR(deit.price * sessions)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className='mb-6 flex items-center justify-between'>
+                    <label htmlFor='' className='text-2xl font-medium'>
+                      Date
+                    </label>
+                    <div>
+                      <Datepicker
+                        selected={selectedDate}
+                        className='self-justify-end rounded-xl bg-[#221D2F] px-4 py-2 text-xl text-white'
+                        onChange={(date: Date) => setDate(date)}
+                        minDate={new Date()}
+                        excludeDates={orders}
+                      />
+                    </div>
+                  </div>
+                  <p className='mb-4 text-xl'>Choose additional services</p>
+                  {services?.map((service, i) => (
+                    <div
+                      key={i}
+                      className='mb-4 flex items-center justify-between rounded-xl bg-[#221D2F] py-4 px-10'
                     >
-                      -
-                    </button>
-                    <input
-                      type='number'
-                      value={sessions}
-                      contentEditable={false}
-                      onKeyDown={(e) => e.preventDefault()}
-                      className='mx-2 w-14 rounded-xl bg-[#221D2F] px-4 py-2 text-xl text-white'
-                    />
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSessions(sessions + 1);
-                      }}
-                      className='mx-2 rounded-xl bg-[#221D2F] px-4 py-2 text-xl text-white'
-                    >
-                      +
-                    </button>
-                    <p className='ml-4 text-2xl font-semibold'>
+                      <div className='flex'>
+                        <input
+                          type='checkbox'
+                          checked={services[i].ordered}
+                          onChange={() => {
+                            const newServices: Service[] = [...services];
+                            newServices[i].ordered = !services[i].ordered;
+                            setServices(newServices);
+                          }}
+                          id={service.name}
+                          className='mr-6 rounded-xl px-4 py-2 text-xl '
+                        />
+                        <label className='text-xl' htmlFor={service.name}>
+                          {service.name}
+                        </label>
+                      </div>
+                      <p className='text-lg font-semibold'>
+                        {convertToIDR(service.price)}
+                      </p>
+                    </div>
+                  ))}
+                  <hr className='my-6' />
+                  <div className='mb-6 flex items-center justify-between'>
+                    <p className='text-2xl font-medium'>Main Service</p>
+                    <p className='text-2xl font-semibold'>
                       {deit?.price && convertToIDR(deit.price * sessions)}
                     </p>
                   </div>
-                </div>
-                <div className='mb-6 flex items-center justify-between'>
-                  <label htmlFor='' className='text-2xl font-medium'>
-                    Date
-                  </label>
-                  <div>
-                    <Datepicker
-                      selected={selectedDate}
-                      className='self-justify-end rounded-xl bg-[#221D2F] px-4 py-2 text-xl text-white'
-                      onChange={(date: Date) => setDate(date)}
-                      minDate={new Date()}
-                      excludeDates={orders}
-                    />
-                  </div>
-                </div>
-                <p className='mb-4 text-xl'>Choose additional services</p>
-                {services?.map((service, i) => (
-                  <div
-                    key={i}
-                    className='mb-4 flex items-center justify-between rounded-xl bg-[#221D2F] py-4 px-10'
-                  >
-                    <div className='flex'>
-                      <input
-                        type='checkbox'
-                        checked={services[i].ordered}
-                        onChange={() => {
-                          const newServices: Service[] = [...services];
-                          newServices[i].ordered = !services[i].ordered;
-                          setServices(newServices);
-                        }}
-                        id={service.name}
-                        className='mr-6 rounded-xl px-4 py-2 text-xl '
-                      />
-                      <label className='text-xl' htmlFor={service.name}>
-                        {service.name}
-                      </label>
-                    </div>
-                    <p className='text-lg font-semibold'>
-                      {convertToIDR(service.price)}
+                  <div className='flex items-center justify-between'>
+                    <p className='text-2xl font-medium'>Add-On Services</p>
+                    <p className='text-2xl font-semibold'>
+                      {convertToIDR(addOns)}
                     </p>
                   </div>
-                ))}
-                <hr className='my-6' />
-                <div className='mb-6 flex items-center justify-between'>
-                  <p className='text-2xl font-medium'>Main Service</p>
-                  <p className='text-2xl font-semibold'>
-                    {deit?.price && convertToIDR(deit.price * sessions)}
-                  </p>
-                </div>
-                <div className='flex items-center justify-between'>
-                  <p className='text-2xl font-medium'>Add-On Services</p>
-                  <p className='text-2xl font-semibold'>
-                    {convertToIDR(addOns)}
-                  </p>
-                </div>
-                <hr className='my-6' />
-                <div className='flex items-center justify-between'>
-                  <p className='text-2xl font-semibold'>
-                    {convertToIDR(total || 0)}
-                  </p>
-                  <button className='rounded-xl bg-[#E97991] px-6 py-2 text-2xl text-white'>
-                    Confirm
-                  </button>
-                </div>
-              </form>
-            </section>
+                  <hr className='my-6' />
+                  <div className='flex items-center justify-between'>
+                    <p className='text-2xl font-semibold'>
+                      {convertToIDR(total || 0)}
+                    </p>
+                    <button
+                      onClick={confirm}
+                      className='rounded-xl bg-[#E97991] px-6 py-2 text-2xl text-white'
+                    >
+                      Confirm
+                    </button>
+                  </div>
+                </form>
+              </section>
+            )}
           </div>
         </div>
       </main>
