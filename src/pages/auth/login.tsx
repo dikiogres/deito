@@ -66,34 +66,34 @@ const Login = () => {
                 <div className='mt-5'>
                   <input
                     type='email'
-                    placeholder='Email'
-                    className='w-full border border-gray-400 py-1 px-2'
-                  />
-                </div>
-                <div className='mt-5'>
-                  <input
-                    type='password'
                     {...register('email', { required: 'Email is required' })}
-                    placeholder='Password'
+                    placeholder='Email'
                     className='w-full border border-gray-400 py-1 px-2'
                   />
                   {errors.email && (
                     <p className='text-red-400'>{errors.email.message}</p>
                   )}
                 </div>
+                <div className='mt-5'>
+                  <input
+                    type='password'
+                    {...register('password', {
+                      required: 'Password is required',
+                    })}
+                    placeholder='Password'
+                    className='w-full border border-gray-400 py-1 px-2'
+                  />
+                  {errors.password && (
+                    <p className='text-red-400'>{errors.password.message}</p>
+                  )}
+                </div>
                 <div className='my-5 flex items-center justify-between'>
                   <div className='form-group form-check'>
                     <input
                       type='checkbox'
-                      {...register('password', {
-                        required: 'Password is required',
-                      })}
                       className='form-check-input float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-blue-600 checked:bg-blue-600 focus:outline-none'
                       id='exampleCheck2'
                     />
-                    {errors.password && (
-                      <p className='text-red-400'>{errors.password.message}</p>
-                    )}
                     <label className='form-check-label inline-block text-gray-800'>
                       Remember me
                     </label>
