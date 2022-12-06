@@ -40,6 +40,30 @@ const Service = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <Swiper
+        // install Swiper modules
+        loop={true}
+        modules={[Autoplay, Navigation, Pagination]}
+        freeMode={true}
+        spaceBetween={0}
+        grabCursor={true}
+        slidesPerView={7}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{
+          delay: 1,
+          disableOnInteraction: false,
+          reverseDirection: true,
+        }}
+        speed={5000}
+      >
+        {serviceDataItems?.map((item) => (
+          <SwiperSlide key={item.id}>
+            <ServiceCard item={item} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
   );
 };
