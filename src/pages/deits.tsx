@@ -2,6 +2,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
+import convertToIDR from '@/lib/converter';
 import db from '@/lib/firebase';
 
 import Layout from '@/components/layout/Layout';
@@ -88,7 +89,7 @@ export default function HomePage() {
                       <p className='mt-3 text-slate-200'>{deit?.desc}</p>
 
                       <p className='mt-8 mb-8 justify-self-end text-xl font-semibold'>
-                        {deit?.price}
+                        {deit?.price && convertToIDR(deit.price)}
                       </p>
                     </div>
                   </UnstyledLink>

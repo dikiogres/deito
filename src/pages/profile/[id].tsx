@@ -141,7 +141,9 @@ export default function HomePage() {
                   {services?.map((service, i) => (
                     <div key={i} className='mx-8 mb-4'>
                       <p>{service.name}</p>
-                      <p className='text-sm text-slate-300'>{service.price}</p>
+                      <p className='text-sm text-slate-300'>
+                        {service.price && convertToIDR(service.price)}
+                      </p>
                     </div>
                   ))}
                 </div>
