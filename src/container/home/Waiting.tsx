@@ -20,7 +20,7 @@ const Waiting = () => {
           {tags.map((tag) => (
             <div
               key={tag}
-              className='mx-6 mb-6 rounded-2xl bg-slate-800 px-6 py-3 text-left text-xl hover:bg-slate-700'
+              className='mx-6 mb-6 rounded-2xl bg-slate-800 px-6 py-3 text-left text-xl transition delay-150 duration-500 ease-in-out hover:animate-bounce hover:bg-slate-700'
             >
               {tag}
             </div>
