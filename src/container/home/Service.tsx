@@ -1,7 +1,8 @@
 import React from 'react';
-import SwiperCore, { Autoplay } from 'swiper';
+import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import 'swiper/css/autoplay';
 
 const Service = () => {
   SwiperCore.use([Autoplay]);
@@ -15,11 +16,14 @@ const Service = () => {
       </div>
       <Swiper
         // install Swiper modules
-        modules={[Autoplay]}
+        loop={true}
+        modules={[Autoplay, Navigation, Pagination]}
         freeMode={true}
         spaceBetween={0}
         grabCursor={true}
         slidesPerView={7}
+        navigation
+        pagination={{ clickable: true }}
         autoplay={{
           delay: 1,
           disableOnInteraction: false,
@@ -28,7 +32,7 @@ const Service = () => {
       >
         <SwiperSlide>
           <div
-            className='flex h-64 w-48 rounded-lg p-6 shadow-md dark:border-gray-700 dark:bg-gray-800'
+            className='flex h-64 w-48 rounded-lg p-6 shadow-lg transition duration-500 hover:scale-110 hover:shadow-2xl dark:border-gray-700 dark:bg-gray-800'
             style={{
               backgroundImage: 'url(https://placekeanu.com/250/g)',
             }}
