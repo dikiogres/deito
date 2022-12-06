@@ -34,11 +34,11 @@ const Service = () => {
         }}
         speed={5000}
       >
-        <SwiperSlide>
-          {serviceDataItems?.map((item) => (
-            <ServiceCard key={item.id} item={item} />
-          ))}
-        </SwiperSlide>
+        {serviceDataItems?.map((item) => (
+          <SwiperSlide key={item.id}>
+            <ServiceCard item={item} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </section>
   );
