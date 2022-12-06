@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
+import convertToIDR from '@/lib/converter';
 import db from '@/lib/firebase';
 
 import Layout from '@/components/layout/Layout';
@@ -66,7 +67,22 @@ export default function HomePage() {
               />
               <div>
                 <p className='text-4xl font-semibold'>{deit?.name}</p>
+                <p className='text-2xl font-medium'>
+                  {deit?.price && convertToIDR(deit.price)}
+                </p>
                 <div className='my-2 flex'>
+                  {deit?.gender && (
+                    <div
+                      className={`mr-3 rounded-xl bg-[#221D2F] px-3 py-1
+                          ${
+                            deit.gender == 'male'
+                              ? 'text-blue-500'
+                              : 'text-pink-500'
+                          }`}
+                    >
+                      {deit.gender == 'male' ? '♂️' : '♀️'}
+                    </div>
+                  )}
                   <div className='mr-3 rounded-xl bg-[#221D2F] px-3 py-1'>
                     {deit?.age}
                   </div>
