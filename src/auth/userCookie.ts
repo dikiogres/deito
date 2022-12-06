@@ -8,7 +8,7 @@ export const getUserFromCookie = () => {
   return JSON.parse(cookie);
 };
 
-export const setUserCookie = ({ user }: { user: string }) => {
+export const setUserCookie = ({ user }: { user: any }) => {
   cookies.set('auth', user, {
     expires: 1 / 24,
   });
