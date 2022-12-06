@@ -6,6 +6,7 @@ import 'aos/dist/aos.css';
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 import Hero from '@/container/Hero';
+import Service from '@/container/home/Service';
 import Showcase from '@/container/home/Showcase';
 import Waiting from '@/container/home/Waiting';
 
@@ -15,11 +16,11 @@ export default function HomePage() {
   }, []);
 
   return (
-    <Layout>
-      {/* <Seo templateTitle='Home' /> */}
-      <Seo />
-      <main>
-        <section className='relative overflow-hidden bg-slate-900'>
+    <main className='bg-slate-900'>
+      <Layout>
+        {/* <Seo templateTitle='Home' /> */}
+        <Seo />
+        <section className='overflow-hidde relative'>
           <div data-aos='fade-down' data-aos-duration='1000'>
             <Hero />
           </div>
@@ -27,10 +28,13 @@ export default function HomePage() {
             <Waiting />
           </div>
           <div data-aos='fade-up' data-aos-duration='1000'>
+            <Service />
+          </div>
+          <div data-aos='fade-up' data-aos-duration='1000'>
             <Showcase />
           </div>
         </section>
-      </main>
-    </Layout>
+      </Layout>
+    </main>
   );
 }
