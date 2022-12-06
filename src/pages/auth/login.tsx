@@ -1,7 +1,7 @@
 import AOS from 'aos';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import 'aos/dist/aos.css';
 
@@ -9,9 +9,40 @@ import BgImg from '~/images/auth/registerBackground.png';
 import Logo from '~/Logo.png';
 
 const Login = () => {
+  //const user = useContext(AuthContext);
+
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     AOS.init();
   }, []);
+
+  // const createAccount = async () => {
+  //   try {
+  //     await auth.createUserWithEmailAndPassword(
+  //       emailRef.current!.value,
+  //       passwordRef.current!.value
+  //     );
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  const signIn = async () => {
+    // try {
+    //   await auth.signInWithEmailAndPassword(
+    //     emailRef.current!.value,
+    //     passwordRef.current!.value
+    //   );
+    // } catch (error) {
+    //   console.error(error);
+    // }
+  };
+
+  // const signOut = async () => {
+  //   await auth.signOut();
+  // };
 
   return (
     <div
@@ -38,6 +69,7 @@ const Login = () => {
                   type='email'
                   placeholder='Email'
                   className='w-full border border-gray-400 py-1 px-2'
+                  ref={emailRef}
                 />
               </div>
               <div className='mt-5'>
@@ -45,6 +77,7 @@ const Login = () => {
                   type='password'
                   placeholder='Password'
                   className='w-full border border-gray-400 py-1 px-2'
+                  ref={passwordRef}
                 />
               </div>
               <div className='my-5 flex items-center justify-between'>
@@ -63,7 +96,10 @@ const Login = () => {
                 </a>
               </div>
               <div className='mt-5'>
-                <button className='w-full rounded-xl bg-pink-400 py-3 text-center font-semibold text-white shadow-lg transition duration-500 hover:scale-110 hover:shadow-2xl'>
+                <button
+                  className='w-full rounded-xl bg-pink-400 py-3 text-center font-semibold text-white shadow-lg transition duration-500 hover:scale-110 hover:shadow-2xl'
+                  onClick={signIn}
+                >
                   Log In
                 </button>
               </div>
