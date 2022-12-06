@@ -13,7 +13,7 @@ const ServiceCard = ({ item }: { item: Service }) => {
       <div className='flex items-end'>
         <a
           href='#'
-          className='inline-flex items-center rounded-lg bg-[#00000075] px-3 py-2 text-center text-sm font-medium text-white'
+          className='inline-flex items-center rounded-lg bg-[#00000075] px-3 py-2 text-center text-sm font-medium text-white transition duration-500 hover:bg-[#000000]'
         >
           {item.dater}+ Deits
         </a>

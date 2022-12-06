@@ -27,7 +27,9 @@ export default function HomePage() {
           <div data-aos='fade-up' data-aos-duration='1000'>
             <Waiting />
           </div>
-          <Service />
+          <div data-aos='fade-up' data-aos-duration='1000'>
+            <Service />
+          </div>
           <div data-aos='fade-up' data-aos-duration='1000'>
             <Showcase />
           </div>
