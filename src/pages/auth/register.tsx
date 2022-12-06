@@ -1,17 +1,47 @@
 import AOS from 'aos';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import 'aos/dist/aos.css';
 
+import { useAuth } from '../../auth/context/AuthContext';
+
 import BgImg from '~/images/auth/registerBackground.png';
 import Logo from '~/Logo.png';
+
+interface SignupType {
+  email: string;
+  password: string;
+  password_confirm: string;
+}
 
 const Register = () => {
   useEffect(() => {
     AOS.init();
   }, []);
+
+  const { signUp } = useAuth();
+  const router = useRouter();
+
+  const methods = useForm<SignupType>({ mode: 'onBlur' });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+
+  const onSubmit = async (data: SignupType) => {
+    try {
+      await signUp(data.email, data.password);
+      router.push('/dashboard');
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div
@@ -51,67 +81,82 @@ const Register = () => {
             <p className='mb-4'>
               Create your account. It’s free and only take a minute
             </p>
-            <form action='#'>
-              <div className='mt-5'>
-                <input
-                  type='text'
-                  placeholder='Name'
-                  className='w-full border border-gray-400 py-1 px-2'
-                />
-              </div>
-              <div className='mt-5'>
-                <input
-                  type='text'
-                  placeholder='Phone Number'
-                  className='w-full border border-gray-400 py-1 px-2'
-                />
-              </div>
-              <div className='mt-5'>
-                <input
-                  type='email'
-                  placeholder='Email'
-                  className='w-full border border-gray-400 py-1 px-2'
-                />
-              </div>
-              <div className='mt-5'>
-                <input
-                  type='password'
-                  placeholder='Password'
-                  className='w-full border border-gray-400 py-1 px-2'
-                />
-              </div>
-              <div className='mt-5'>
-                <input
-                  type='checkbox'
-                  className='mr-5 border border-gray-400'
-                />
-                <span>
-                  I accept the{' '}
-                  <a href='#' className='font-semibold text-pink-400'>
-                    Terms of Use
-                  </a>{' '}
-                  &{' '}
-                  <a href='#' className='font-semibold text-pink-400'>
-                    Privacy Policy
-                  </a>
-                </span>
-              </div>
-              <div className='mt-5'>
-                <button className='w-full rounded-xl bg-pink-400 py-3 text-center font-semibold text-white shadow-lg transition duration-500 hover:scale-110 hover:shadow-2xl'>
-                  Register Now
-                </button>
-              </div>
-              <p className='mt-2 mb-0 pt-1 text-sm font-semibold'>
-                Already have an account?
-                <Link
-                  href='/auth/login'
-                  className='text-red-600 transition duration-200 ease-in-out hover:text-red-700 focus:text-red-700'
-                >
-                  {' '}
-                  Log in
-                </Link>
-              </p>
-            </form>
+            <FormProvider {...methods}>
+              <form action='#' onSubmit={handleSubmit(onSubmit)}>
+                <div className='mt-5'>
+                  <input
+                    type='text'
+                    placeholder='Name'
+                    className='w-full border border-gray-400 py-1 px-2'
+                  />
+                </div>
+                <div className='mt-5'>
+                  <input
+                    type='text'
+                    placeholder='Phone Number'
+                    className='w-full border border-gray-400 py-1 px-2'
+                  />
+                </div>
+                <div className='mt-5'>
+                  <input
+                    type='email'
+                    {...register('email', { required: 'Email is required' })}
+                    placeholder='Email'
+                    className='w-full border border-gray-400 py-1 px-2'
+                  />
+                  {errors.email && (
+                    <p className='text-red-400'>{errors.email.message}</p>
+                  )}
+                </div>
+                <div className='mt-5'>
+                  <input
+                    type='password'
+                    {...register('password', {
+                      required: 'Password is required',
+                    })}
+                    placeholder='Password'
+                    className='w-full border border-gray-400 py-1 px-2'
+                  />
+                  {errors.password && (
+                    <p className='text-red-400'>{errors.password.message}</p>
+                  )}
+                </div>
+                <div className='mt-5'>
+                  <input
+                    type='checkbox'
+                    className='mr-5 border border-gray-400'
+                  />
+                  <span>
+                    I accept the{' '}
+                    <a href='#' className='font-semibold text-pink-400'>
+                      Terms of Use
+                    </a>{' '}
+                    &{' '}
+                    <a href='#' className='font-semibold text-pink-400'>
+                      Privacy Policy
+                    </a>
+                  </span>
+                </div>
+                <div className='mt-5'>
+                  <button
+                    type='submit'
+                    className='w-full rounded-xl bg-pink-400 py-3 text-center font-semibold text-white shadow-lg transition duration-500 hover:scale-110 hover:shadow-2xl'
+                  >
+                    Register Now
+                  </button>
+                </div>
+                <p className='mt-2 mb-0 pt-1 text-sm font-semibold'>
+                  Already have an account?
+                  <Link
+                    href='/auth/login'
+                    className='text-red-600 transition duration-200 ease-in-out hover:text-red-700 focus:text-red-700'
+                  >
+                    {' '}
+                    Log in
+                  </Link>
+                </p>
+              </form>
+            </FormProvider>
           </div>
         </div>
       </div>
