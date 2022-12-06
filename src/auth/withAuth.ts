@@ -7,3 +7,11 @@ export const getUserFromCookie = () => {
   }
   return JSON.parse(cookie);
 };
+
+export const setUserCookie = ({ user }: { user: string }) => {
+  cookies.set('auth', user, {
+    expires: 1 / 24,
+  });
+};
+
+export const removeUserCookie = () => cookies.remove('auth');
