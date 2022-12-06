@@ -1,5 +1,9 @@
-const withAuth = () => {
-  return;
-};
+import cookies from 'js-cookie';
 
-export default withAuth;
+export const getUserFromCookie = () => {
+  const cookie = cookies.get('auth');
+  if (!cookie) {
+    return;
+  }
+  return JSON.parse(cookie);
+};
