@@ -76,7 +76,7 @@ export default function HomePage() {
                 </div>
                 <p className='my-2 text-slate-200'>Tags</p>
                 <div className='my-2 flex'>
-                  {deit?.tags.map((tag) => (
+                  {deit?.tags?.map((tag) => (
                     <div
                       key={tag}
                       className='mr-3 rounded-xl bg-[#221D2F] px-3 py-1'
@@ -141,7 +141,7 @@ export default function HomePage() {
                 <div className='mb-10 h-fit w-full rounded-xl bg-[#221D2F] px-8 py-10'>
                   <h2 className='mb-3'>Album</h2>
                   <div className='flex overflow-x-clip'>
-                    {deit?.album.map((image, i) => (
+                    {deit?.album?.map((image, i) => (
                       <Image
                         key={i}
                         className='mr-4'
