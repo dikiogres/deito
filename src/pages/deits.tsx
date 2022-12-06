@@ -37,7 +37,7 @@ export default function HomePage() {
             <section className='mx-auto grid w-full max-w-6xl grid-cols-3 bg-slate-900 pt-8 pb-16 text-left text-white'>
               {deits &&
                 deits.map((deit) => (
-                  <UnstyledLink key={deit} href={`/profile/${deit?.id}`}>
+                  <UnstyledLink key={deit.id} href={`/profile/${deit?.id}`}>
                     <div className='mx-8 mt-16 flex cursor-pointer flex-col rounded-xl bg-slate-700 px-8 transition hover:-translate-y-2 hover:scale-105 hover:shadow-lg'>
                       <Image
                         className='-mt-8'
