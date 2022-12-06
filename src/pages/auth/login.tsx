@@ -7,7 +7,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import 'aos/dist/aos.css';
 
-import { useAuth } from '../../auth/context/AuthContext';
+import { useAuth } from '../../auth/context/authContext';
 
 import BgImg from '~/images/auth/registerBackground.png';
 import Logo from '~/Logo.png';

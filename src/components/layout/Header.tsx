@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { useAuth } from '../../auth/context/AuthContext';
+import { useAuth } from '../../auth/context/authContext';
 
 import Logo from '~/Logo.png';
 
