@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -83,7 +83,25 @@ export default function HomePage() {
     setOrders(ordersData);
   };
 
-  const confirm = async () => {
+  const confirm = async (e) => {
+    e.preventDefault();
+
+    const selectedServices = [];
+    services?.forEach((service) => {
+      if (service.ordered) {
+        selectedServices.push(doc(db, `/dater/${id}/services/${service.id}`));
+      }
+    });
+
+    await addDoc(collection(db, `dater/${id}/orders`), {
+      date: selectedDate,
+      sessions,
+      done: false,
+      services: selectedServices,
+      user: doc(db, '/users/phaRp8zlFyuaSUm4MLRH'),
+      total,
+    });
+
     setConfirmed(true);
   };
 
