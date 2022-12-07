@@ -92,11 +92,11 @@ export default function HomePage() {
                   )
                   .filter((deit) => deit.gender == gender || gender == '')
                   .map((deit) => (
-                    <UnstyledLink key={deit} href={`/profile/${deit?.id}`}>
+                    <UnstyledLink key={deit.id} href={`/profile/${deit?.id}`}>
                       <div className='mx-8 mt-16 flex cursor-pointer flex-col rounded-xl bg-slate-700 px-8 transition hover:-translate-y-2 hover:scale-105 hover:shadow-lg'>
                         <Image
-                          className='-mt-8'
-                          src='/images/power.png'
+                          className='-mt-8 rounded-xl'
+                          src={deit?.profilePicture}
                           alt='profPic'
                           width={120}
                           height={120}
