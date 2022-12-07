@@ -7,7 +7,6 @@ import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 import Hero from '@/container/Hero';
 import Service from '@/container/home/Service';
-import Showcase from '@/container/home/Showcase';
 import Waiting from '@/container/home/Waiting';
 
 export default function HomePage() {
@@ -30,9 +29,9 @@ export default function HomePage() {
           <div data-aos='fade-up' data-aos-duration='1000'>
             <Service />
           </div>
-          <div data-aos='fade-up' data-aos-duration='1000'>
+          {/* <div data-aos='fade-up' data-aos-duration='1000'>
             <Showcase />
-          </div>
+          </div> */}
         </section>
       </Layout>
     </main>
