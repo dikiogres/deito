@@ -12,7 +12,7 @@ interface Deit {
   rating: number;
   tags: string[];
   album: string[];
-  profilePicture: string[];
+  profilePicture: string;
 }
 
 export default Deit;
