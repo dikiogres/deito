@@ -96,7 +96,7 @@ export default function HomePage() {
                       <div className='mx-8 mt-16 flex cursor-pointer flex-col rounded-xl bg-slate-700 px-8 transition hover:-translate-y-2 hover:scale-105 hover:shadow-lg'>
                         <Image
                           className='-mt-8 rounded-xl'
-                          src={deit?.profilePicture}
+                          src={deit?.profilePicture || '/images/power.png'}
                           alt='profPic'
                           width={120}
                           height={120}
