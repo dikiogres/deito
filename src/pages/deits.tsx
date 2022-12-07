@@ -92,11 +92,11 @@ export default function HomePage() {
                   )
                   .filter((deit) => deit.gender == gender || gender == '')
                   .map((deit) => (
-                    <UnstyledLink key={deit} href={`/profile/${deit?.id}`}>
+                    <UnstyledLink key={deit.id} href={`/profile/${deit?.id}`}>
                       <div className='mx-8 mt-16 flex cursor-pointer flex-col rounded-xl bg-slate-700 px-8 transition hover:-translate-y-2 hover:scale-105 hover:shadow-lg'>
                         <Image
-                          className='-mt-8'
-                          src='/images/power.png'
+                          className='-mt-8 rounded-xl'
+                          src={deit?.profilePicture}
                           alt='profPic'
                           width={120}
                           height={120}
@@ -131,14 +131,17 @@ export default function HomePage() {
                           </p>
                         </div>
                         <div className='mt-2 flex'>
-                          {deit?.tags?.slice(0, 1).map((tag) => (
+                          <div className='mr-2 rounded-md bg-slate-600 py-1 px-2'>
+                            {deit?.location}
+                          </div>
+                          {/* {deit?.tags?.slice(0, 1).map((tag) => (
                             <div
                               key={tag}
                               className='mr-2 rounded-md bg-slate-600 py-1 px-2'
                             >
                               {tag}
                             </div>
-                          ))}
+                          ))} */}
                         </div>
                         <p className='mt-3 text-slate-200'>{deit?.desc}</p>
 

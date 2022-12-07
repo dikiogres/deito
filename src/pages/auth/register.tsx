@@ -1,4 +1,5 @@
 import AOS from 'aos';
+import { addDoc, collection, doc } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,12 +8,14 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import 'aos/dist/aos.css';
 
-import { useAuth } from '../../auth/context/authContext';
+import db from '@/lib/firebase';
 
 import BgImg from '~/images/auth/registerBackground.png';
 import Logo from '~/Logo.png';
 
 interface SignupType {
+  name: string;
+  phone_number: string;
   email: string;
   password: string;
   password_confirm: string;
@@ -23,7 +26,6 @@ const Register = () => {
     AOS.init();
   }, []);
 
-  const { signUp } = useAuth();
   const router = useRouter();
 
   const methods = useForm<SignupType>({ mode: 'onBlur' });
@@ -36,8 +38,22 @@ const Register = () => {
 
   const onSubmit = async (data: SignupType) => {
     try {
-      await signUp(data.email, data.password);
-      router.push('/dashboard');
+      const { name, email, phone_number, password } = data;
+      // await signUp(data.email, data.password);
+
+      const userRef = await addDoc(collection(db, `users`), {
+        name,
+        phone_number,
+      });
+
+      await addDoc(collection(db, `account`), {
+        detail: doc(db, `users/${userRef.id}`),
+        email,
+        password,
+        type: 'user',
+      });
+
+      router.push('/auth/login');
     } catch (error: any) {
       console.log(error.message);
     }
@@ -87,6 +103,7 @@ const Register = () => {
                   <input
                     type='text'
                     placeholder='Name'
+                    {...register('name')}
                     className='w-full border border-gray-400 py-1 px-2'
                   />
                 </div>
@@ -94,6 +111,7 @@ const Register = () => {
                   <input
                     type='text'
                     placeholder='Phone Number'
+                    {...register('phone_number')}
                     className='w-full border border-gray-400 py-1 px-2'
                   />
                 </div>

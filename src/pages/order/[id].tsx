@@ -93,12 +93,15 @@ export default function HomePage() {
       }
     });
 
+    const deitoUser = localStorage.getItem('deito-user');
+    const currentUser = JSON.parse(deitoUser);
+
     await addDoc(collection(db, `dater/${id}/orders`), {
       date: selectedDate,
       sessions,
       done: false,
       services: selectedServices,
-      user: doc(db, '/users/phaRp8zlFyuaSUm4MLRH'),
+      user: doc(db, `/users/${currentUser.id}`),
       name: await (await getDoc(doc(db, `dater/${id}`))).get('name'),
       total,
     });

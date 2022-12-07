@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import { useAuth } from '../auth/context/authContext';
-
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const { user } = useAuth();
+
+  let user = localStorage.getItem('deito-user');
+  user = JSON.parse(user);
 
   useEffect(() => {
-    if (!user.uid) {
+    if (!user) {
       router.push('auth/login');
     }
   }, [router, user]);

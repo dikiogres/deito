@@ -18,7 +18,7 @@ const Hero = () => {
               Find your Date
             </h1>
             <Link
-              href='/auth/login'
+              href='/deits'
               className='mr-3 inline-flex items-center justify-center rounded-lg bg-pink-400 px-5 py-3 text-center text-base font-medium text-white  shadow-lg transition duration-500 hover:scale-110 hover:bg-pink-600 hover:shadow-2xl focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900'
             >
               Start Now
