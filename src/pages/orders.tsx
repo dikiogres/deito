@@ -23,9 +23,12 @@ export default function HomePage() {
   }, []);
 
   const getOrders = async () => {
+    const deitoUser = localStorage.getItem('deito-user');
+    const currentUser = JSON.parse(deitoUser);
+
     const userOrders = query(
       collectionGroup(db, 'orders'),
-      where('user', '==', doc(db, 'users/phaRp8zlFyuaSUm4MLRH'))
+      where('user', '==', doc(db, `users/${currentUser.id}`))
     );
     const ordersSnapshot = await getDocs(userOrders);
 

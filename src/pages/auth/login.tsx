@@ -1,4 +1,5 @@
 import AOS from 'aos';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,7 +8,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import 'aos/dist/aos.css';
 
-import { useAuth } from '../../auth/context/authContext';
+import db from '@/lib/firebase';
 
 import BgImg from '~/images/auth/registerBackground.png';
 import Logo from '~/Logo.png';
@@ -22,7 +23,6 @@ const Login = () => {
     AOS.init();
   }, []);
 
-  const { logIn } = useAuth();
   const router = useRouter();
 
   const methods = useForm<LoginType>({ mode: 'onBlur' });
@@ -35,8 +35,24 @@ const Login = () => {
 
   const onSubmit = async (data: LoginType) => {
     try {
-      await logIn(data.email, data.password);
-      router.push('/dashboard');
+      const q = query(
+        collection(db, 'account'),
+        where('email', '==', data.email),
+        where('password', '==', data.password)
+      );
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach(async (docData) => {
+        localStorage.setItem(
+          'deito-user',
+          JSON.stringify({
+            id: docData.get('detail').id,
+            type: 'user',
+          })
+        );
+      });
+
+      router.push('/');
     } catch (error: any) {
       console.log(error.message);
     }
@@ -88,7 +104,7 @@ const Login = () => {
                   )}
                 </div>
                 <div className='my-5 flex items-center justify-between'>
-                  <div className='form-group form-check'>
+                  {/* <div className='form-group form-check'>
                     <input
                       type='checkbox'
                       className='form-check-input float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-blue-600 checked:bg-blue-600 focus:outline-none'
@@ -97,10 +113,10 @@ const Login = () => {
                     <label className='form-check-label inline-block text-gray-800'>
                       Remember me
                     </label>
-                  </div>
-                  <a href='#!' className='text-gray-800 underline'>
+                  </div> */}
+                  {/* <a href='#!' className='text-gray-800 underline'>
                     Forgot password?
-                  </a>
+                  </a> */}
                 </div>
                 <div className='mt-5'>
                   <button
@@ -110,11 +126,11 @@ const Login = () => {
                     Log In
                   </button>
                 </div>
-                <div className='my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300'>
+                {/* <div className='my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300'>
                   <p className='mx-4 mb-0 text-center font-semibold'>OR</p>
-                </div>
+                </div> */}
 
-                <a
+                {/* <a
                   className='mb-3 flex w-full items-center justify-center rounded px-7 py-3  text-sm font-medium uppercase leading-snug text-white shadow-lg transition duration-500 hover:scale-110 hover:shadow-2xl'
                   style={{
                     backgroundColor: '#3b5998',
@@ -135,7 +151,7 @@ const Login = () => {
                     />
                   </svg>
                   Continue with Facebook
-                </a>
+                </a> */}
                 <p className='mt-2 mb-0 pt-1 text-sm font-semibold'>
                   Don't have an account?
                   <Link
@@ -157,13 +173,13 @@ const Login = () => {
           >
             <h1 className='mb-3 text-3xl text-white'>Welcome</h1>
             <div>
-              <p className='text-white'>
+              {/* <p className='text-white'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
                 suspendisse aliquam varius rutrum purus maecenas ac{' '}
                 <a href='#' className='font-semibold text-pink-400'>
                   Learn more
                 </a>
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
