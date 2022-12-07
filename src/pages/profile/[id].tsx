@@ -168,7 +168,14 @@ export default function HomePage() {
                 >
                   <h2 className='mb-3'>Album</h2>
                   <div className='flex overflow-x-clip'>
-                    {deit?.album?.map((image, i) => (
+                    <Image
+                      className='mr-4'
+                      src={`${deit?.profilePicture}`}
+                      alt='album'
+                      width={150}
+                      height={150}
+                    />
+                    {/* {deit?.album?.map((image, i) => (
                       <Image
                         key={i}
                         className='mr-4'
@@ -177,7 +184,7 @@ export default function HomePage() {
                         width={150}
                         height={150}
                       />
-                    ))}
+                    ))} */}
                   </div>
                 </div>
                 <div

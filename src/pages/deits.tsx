@@ -131,14 +131,17 @@ export default function HomePage() {
                           </p>
                         </div>
                         <div className='mt-2 flex'>
-                          {deit?.tags?.slice(0, 1).map((tag) => (
+                          <div className='mr-2 rounded-md bg-slate-600 py-1 px-2'>
+                            {deit?.location}
+                          </div>
+                          {/* {deit?.tags?.slice(0, 1).map((tag) => (
                             <div
                               key={tag}
                               className='mr-2 rounded-md bg-slate-600 py-1 px-2'
                             >
                               {tag}
                             </div>
-                          ))}
+                          ))} */}
                         </div>
                         <p className='mt-3 text-slate-200'>{deit?.desc}</p>
 
