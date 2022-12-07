@@ -62,20 +62,20 @@ export default function Header() {
             </div>
           ) : (
             <ul>
-              <li className='my-3 mr-4 block items-center justify-self-end md:my-0 md:inline-block'>
+              {/* <li className='my-3 mr-4 block items-center justify-self-end md:my-0 md:inline-block'>
                 <Link href='/dashboard'>
-                  <p className='text-blue-800 transition hover:text-blue-900'>
+                  <p className='font-semibold text-white transition'>
                     Dashboard
                   </p>
                 </Link>
-              </li>
+              </li> */}
               <li className='my-3 mr-4 block items-center md:my-0 md:inline-block '>
-                <a
+                <p
                   onClick={handleLogout}
-                  className='cursor-pointer justify-self-end text-blue-800 transition  hover:text-blue-900'
+                  className='cursor-pointer justify-self-end rounded-xl bg-pink-500 px-3 py-1 font-semibold text-white transition'
                 >
                   Logout
-                </a>
+                </p>
               </li>
             </ul>
           )}
