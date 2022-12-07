@@ -60,8 +60,8 @@ export default function HomePage() {
           <div className='mx-auto mt-12 w-full max-w-6xl text-white'>
             <section className='flex items-end'>
               <Image
-                className='mr-8'
-                src='/images/power.png'
+                className='mr-8 rounded-xl'
+                src={deit?.profilePicture}
                 alt='profile picture'
                 width={200}
                 height={200}
